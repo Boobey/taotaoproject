@@ -6,8 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="taotaoproject" />
+        <module name="taotao-manage-service" />
+        <module name="tatao-common" />
+        <module name="taotao-manage-pojo" />
+        <module name="taotao-manage-web" />
+        <module name="taotao-manage-mapper" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="taotao-parent" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
