@@ -116,13 +116,19 @@
 		$.ajax({
 		   type: "POST",
 		   url: "/rest/item",
-		   data: $("#itemAddForm").serialize(),
-		   success: function(msg){
-			   $.messager.alert('提示','新增商品成功!');
-		   },
-		   error: function(){
-			   $.messager.alert('提示','新增商品失败!');
-		   }
+			data: $("#itemAddForm").serialize(), //表单序列化，将所有的输入内容转化成K/V数据格式
+			statusCode : {
+				201 : function(){
+					$.messager.alert('提示','新增商品成功!');
+				},
+				400 : function(){
+					$.messager.alert('提示','提交的参数不合法!');
+				},
+				500 : function(){
+					$.messager.alert('提示','新增商品失败!');
+				}
+			}
+
 		});
 	}
 	

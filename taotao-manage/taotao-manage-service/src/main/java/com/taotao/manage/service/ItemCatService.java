@@ -11,8 +11,8 @@ import java.util.List;
 @Service
 public class ItemCatService extends BaseService<ItemCat>{
 
-    @Autowired
-    private ItemCatMapper itemCatMapper;
+//    @Autowired
+//    private ItemCatMapper itemCatMapper;
 
 //    public List<ItemCat> queryItemCatListByParentId(Long pid) {
 //        ItemCat record = new ItemCat();
@@ -20,8 +20,8 @@ public class ItemCatService extends BaseService<ItemCat>{
 //        return this.itemCatMapper.select(record);
 //    }
 
-    @Override
-    public Mapper<ItemCat> getMapper() {
-        return this.itemCatMapper;
-    }
+//    @Override
+//    public Mapper<ItemCat> getMapper() {
+//        return this.itemCatMapper;
+//    }
 }
