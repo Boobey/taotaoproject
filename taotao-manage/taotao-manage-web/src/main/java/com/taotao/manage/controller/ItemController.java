@@ -20,9 +20,6 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @Autowired
-    private ItemDescService itemDescService;
-
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> saveItem(Item item, @RequestParam("desc") String desc) {
         try {
@@ -31,16 +28,12 @@ public class ItemController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
 
-            // 初始值
-            item.setStatus(1);
-            item.setId(null); // 处于安全考虑，强制设置id为null，通过数据库自增长得到
-            this.itemService.save(item);
-
-            ItemDesc itemDesc = new ItemDesc();
-            itemDesc.setItemId(item.getId());
-            itemDesc.setItemDesc(desc);
-            this.itemDescService.save(itemDesc);
-
+            // 保存商品
+            Boolean bool = this.itemService.saveItem(item, desc);
+            if (!bool) {
+                // 保存失败
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (Exception e) {
             e.printStackTrace();
