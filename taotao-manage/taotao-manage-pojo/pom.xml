@@ -11,5 +11,12 @@
 
     <artifactId>taotao-manage-pojo</artifactId>
 
-
+    <dependencies>
+        <!-- JPA依赖 -->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 </project>

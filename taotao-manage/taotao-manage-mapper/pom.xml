@@ -11,5 +11,29 @@
 
     <artifactId>taotao-manage-mapper</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.taotao.manage</groupId>
+            <artifactId>taotao-manage-pojo</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <!-- Mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <!-- 通用Mapper -->
+        <dependency>
+            <groupId>com.github.abel533</groupId>
+            <artifactId>mapper</artifactId>
+            <!-- 排除JPA依赖，由taotao-manage-pojo传递JPA依赖 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>persistence-api</groupId>
+                    <artifactId>javax.persistence</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 
 </project>
