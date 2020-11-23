@@ -1,3 +1,4 @@
 com\taotao\manage\controller\PageController.class
+com\taotao\manage\controller\PicUploadController.class
 com\taotao\manage\controller\ItemCatController.class
 com\taotao\manage\controller\ItemController.class
