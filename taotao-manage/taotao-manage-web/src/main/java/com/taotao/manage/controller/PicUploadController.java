@@ -9,12 +9,14 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
 import com.taotao.common.bean.PicUploadResult;
+import com.taotao.manage.service.PropertieService;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,9 @@ public class PicUploadController {
 
 	// 允许上传的格式
 	private static final String[] IMAGE_TYPE = new String[] { ".bmp", ".jpg", ".jpeg", ".gif", ".png" };
+
+	@Autowired
+	private PropertieService propertieService;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
@@ -66,8 +71,8 @@ public class PicUploadController {
 		}
 
 		// 生成图片的绝对引用地址
-		String picUrl = StringUtils.replace(StringUtils.substringAfter(filePath, "E:\\taotao-upload"), "\\", "/");
-		fileUploadResult.setUrl("http://image.taotao.com" + picUrl);
+		String picUrl = StringUtils.replace(StringUtils.substringAfter(filePath, propertieService.REPOSITORY_PATH), "\\", "/");
+		fileUploadResult.setUrl(propertieService.IMAGE_BASE_URL + picUrl);
 
 		File newFile = new File(filePath);
 
@@ -99,7 +104,7 @@ public class PicUploadController {
 	}
 
 	private String getFilePath(String sourceFileName) {
-		String baseFolder = "E:\\taotao-upload" + File.separator + "images";
+		String baseFolder = propertieService.REPOSITORY_PATH + File.separator + "images";
 		Date nowDate = new Date();
 		// yyyy/MM/dd
 		String fileFolder = baseFolder + File.separator + new DateTime(nowDate).toString("yyyy") + File.separator + new DateTime(nowDate).toString("MM") + File.separator
