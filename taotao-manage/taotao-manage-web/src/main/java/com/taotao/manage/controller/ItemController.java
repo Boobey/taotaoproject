@@ -26,7 +26,8 @@ public class ItemController {
     private ItemService itemService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> saveItem(Item item, @RequestParam("desc") String desc) {
+    public ResponseEntity<Void> saveItem(Item item, @RequestParam("desc") String desc,
+                                         @RequestParam("itemParams") String itemParams) {
         try {
             if (LOGGER.isDebugEnabled())  {
                 LOGGER.debug("新增商品, item = {}, desc = {}", item, desc);
@@ -38,7 +39,7 @@ public class ItemController {
             }
 
             // 保存商品
-            Boolean bool = this.itemService.saveItem(item, desc);
+            Boolean bool = this.itemService.saveItem(item, desc, itemParams);
             if (!bool) {
                 if (LOGGER.isInfoEnabled()) {
                     LOGGER.info("新增商品失败, item = {}", item);

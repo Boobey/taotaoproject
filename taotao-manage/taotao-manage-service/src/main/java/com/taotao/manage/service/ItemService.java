@@ -7,6 +7,7 @@ import com.taotao.common.bean.EasyUIResult;
 import com.taotao.manage.mapper.ItemMapper;
 import com.taotao.manage.pojo.Item;
 import com.taotao.manage.pojo.ItemDesc;
+import com.taotao.manage.pojo.ItemParamItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,10 @@ public class ItemService extends BaseService<Item> {
     @Autowired
     private ItemDescService itemDescService;
 
-    public Boolean saveItem(Item item, String desc) {
+    @Autowired
+    private ItemParamItemService itemParamItemService;
+
+    public Boolean saveItem(Item item, String desc, String itemParams) {
         // 初始值
         item.setStatus(1);
         item.setId(null); // 处于安全考虑，强制设置id为null，通过数据库自增长得到
@@ -33,7 +37,13 @@ public class ItemService extends BaseService<Item> {
         itemDesc.setItemDesc(desc);
         Integer count2 = this.itemDescService.save(itemDesc);
 
-        return count1.intValue() == 1 && count2.intValue() == 1;
+        // 保存规格参数数据
+        ItemParamItem itemParamItem = new ItemParamItem();
+        itemParamItem.setItemId(item.getId());
+        itemParamItem.setParamData(itemParams);
+        Integer count3 = this.itemParamItemService.save(itemParamItem);
+
+        return count1.intValue() == 1 && count2.intValue() == 1 && count3.intValue() == 1;
     }
 
     public EasyUIResult queryItemList(Integer page, Integer rows) {
