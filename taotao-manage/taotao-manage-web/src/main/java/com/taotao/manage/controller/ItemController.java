@@ -76,4 +76,39 @@ public class ItemController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<Void> updateItem(Item item, @RequestParam("desc") String desc){
+        try {
+            if (LOGGER.isDebugEnabled())  {
+                LOGGER.debug("编辑商品, item = {}, desc = {}", item, desc);
+            }
+
+            if (StringUtils.isEmpty(item.getTitle())) {
+                // 参数有误，400
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+
+            // 编辑商品
+            Boolean bool = this.itemService.updateItem(item, desc);
+            if (!bool) {
+                if (LOGGER.isInfoEnabled()) {
+                    LOGGER.info("编辑商品失败, item = {}", item);
+                }
+
+                // 保存失败, 500
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("编辑商品成功, itemId = {}", item.getId());
+            }
+
+            // 204
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (Exception e) {
+            LOGGER.error("编辑商品出错! item = " + item, e);
+        }
+        // 500
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
 }
