@@ -1,5 +1,6 @@
 package com.taotao.manage.controller;
 
+import com.taotao.common.bean.EasyUIResult;
 import com.taotao.manage.pojo.Item;
 import com.taotao.manage.pojo.ItemDesc;
 import com.taotao.manage.service.ItemDescService;
@@ -55,5 +56,24 @@ public class ItemController {
             LOGGER.error("新增商品出错! item = " + item, e);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+
+    /**
+     * 查询商品列表
+     *
+     * @param page
+     * @param rows
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<EasyUIResult> queryItemList(
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "rows", defaultValue = "30") Integer rows) {
+        try {
+            return ResponseEntity.ok(this.itemService.queryItemList(page, rows));
+        } catch (Exception e) {
+            LOGGER.error("查询商品列表出错! page = " + page + ", row =" + rows, e);
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 }

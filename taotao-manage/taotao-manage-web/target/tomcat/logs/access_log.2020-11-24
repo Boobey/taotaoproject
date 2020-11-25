@@ -67,3 +67,11 @@
 127.0.0.1 - - [24/Nov/2020:09:06:03 +0800] "GET /js/kindeditor-4.1.10/plugins/multiimage/images/swfupload.swf?preventswfcaching=1606179963172 HTTP/1.0" 200 12787 http-bio-8081-exec-2 2
 127.0.0.1 - - [24/Nov/2020:09:06:07 +0800] "GET /js/kindeditor-4.1.10/plugins/multiimage/images/image.png HTTP/1.0" 304 - http-bio-8081-exec-3 2
 127.0.0.1 - - [24/Nov/2020:09:06:08 +0800] "POST /rest/pic/upload?dir=image HTTP/1.0" 200 119 http-bio-8081-exec-4 258
+127.0.0.1 - - [24/Nov/2020:09:23:10 +0800] "GET /rest/page/item-list?_=1606179961059 HTTP/1.0" 200 6622 http-bio-8081-exec-6 75
+127.0.0.1 - - [24/Nov/2020:09:23:10 +0800] "GET /js/jquery-easyui-1.4.1/themes/icons/pencil.png HTTP/1.0" 200 713 http-bio-8081-exec-8 2
+127.0.0.1 - - [24/Nov/2020:09:23:10 +0800] "GET /js/jquery-easyui-1.4.1/themes/icons/edit_remove.png HTTP/1.0" 200 625 http-bio-8081-exec-7 2
+127.0.0.1 - - [24/Nov/2020:09:23:10 +0800] "GET /js/jquery-easyui-1.4.1/themes/default/images/pagination_icons.png HTTP/1.0" 200 628 http-bio-8081-exec-10 3
+127.0.0.1 - - [24/Nov/2020:09:23:10 +0800] "GET /js/jquery-easyui-1.4.1/themes/icons/edit_add.png HTTP/1.0" 200 1088 http-bio-8081-exec-5 9
+127.0.0.1 - - [24/Nov/2020:09:23:10 +0800] "GET /js/jquery-easyui-1.4.1/themes/icons/cancel.png HTTP/1.0" 200 1133 http-bio-8081-exec-9 6
+127.0.0.1 - - [24/Nov/2020:09:23:10 +0800] "GET /js/jquery-easyui-1.4.1/themes/icons/filesave.png HTTP/1.0" 200 898 http-bio-8081-exec-1 2
+127.0.0.1 - - [24/Nov/2020:09:23:10 +0800] "GET /rest/item?page=1&rows=30 HTTP/1.0" 405 1045 http-bio-8081-exec-2 3
