@@ -1,4 +1,6 @@
 com\taotao\manage\pojo\ItemCat.class
+com\taotao\manage\pojo\ItemParamItem.class
 com\taotao\manage\pojo\BasePojo.class
+com\taotao\manage\pojo\ItemParam.class
 com\taotao\manage\pojo\ItemDesc.class
 com\taotao\manage\pojo\Item.class

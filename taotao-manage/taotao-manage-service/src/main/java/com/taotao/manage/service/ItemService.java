@@ -62,7 +62,7 @@ public class ItemService extends BaseService<Item> {
 
     }
 
-    public Boolean updateItem(Item item, String desc) {
+    public Boolean updateItem(Item item, String desc, String itemParams) {
         item.setStatus(null); // 强制设置状态不能被修改
         Integer count1 = super.updateSelective(item);
 
@@ -70,6 +70,10 @@ public class ItemService extends BaseService<Item> {
         itemDesc.setItemId(item.getId());
         itemDesc.setItemDesc(desc);
         Integer count2 = this.itemDescService.updateSelective(itemDesc);
-        return count1.intValue() == 1 && count2.intValue() == 1;
+
+        // 更新规格参数数据
+        Integer count3 = this.itemParamItemService.updateItemParamsItem(item.getId(), itemParams);
+
+        return count1.intValue() == 1 && count2.intValue() == 1 && count3.intValue() == 1;
     }
 }

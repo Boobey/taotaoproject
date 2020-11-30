@@ -78,6 +78,13 @@ public class ItemController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 
+    /**
+     *  更新商品
+     * @param item
+     * @param desc
+     * @param itemParams
+     * @return
+     */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> updateItem(Item item, @RequestParam("desc") String desc,
                                            @RequestParam("itemParams") String itemParams){
@@ -92,7 +99,7 @@ public class ItemController {
             }
 
             // 编辑商品
-            Boolean bool = this.itemService.updateItem(item, desc);
+            Boolean bool = this.itemService.updateItem(item, desc, itemParams);
             if (!bool) {
                 if (LOGGER.isInfoEnabled()) {
                     LOGGER.info("编辑商品失败, item = {}", item);
