@@ -9,8 +9,9 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>tatao-common</module>
+        <module>taotao-common</module>
         <module>taotao-manage</module>
+        <module>taotao-web</module>
     </modules>
 
     <properties>
