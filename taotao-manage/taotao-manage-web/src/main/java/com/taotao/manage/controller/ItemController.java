@@ -79,7 +79,8 @@ public class ItemController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateItem(Item item, @RequestParam("desc") String desc){
+    public ResponseEntity<Void> updateItem(Item item, @RequestParam("desc") String desc,
+                                           @RequestParam("itemParams") String itemParams){
         try {
             if (LOGGER.isDebugEnabled())  {
                 LOGGER.debug("编辑商品, item = {}, desc = {}", item, desc);
