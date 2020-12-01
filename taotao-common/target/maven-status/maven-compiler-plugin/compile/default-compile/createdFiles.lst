@@ -1,2 +1,4 @@
+com\taotao\common\bean\ItemCatResult.class
 com\taotao\common\bean\PicUploadResult.class
 com\taotao\common\bean\EasyUIResult.class
+com\taotao\common\bean\ItemCatData.class
