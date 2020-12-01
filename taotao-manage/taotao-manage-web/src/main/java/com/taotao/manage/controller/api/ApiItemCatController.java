@@ -26,7 +26,7 @@ public class ApiItemCatController {
      *
      * @return
      */
-    @RequestMapping(method = RequestMethod.GET)
+    /*@RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> queryItemCatList(
             @RequestParam(value = "callback", required = false)String callback) {
         try {
@@ -36,6 +36,17 @@ public class ApiItemCatController {
                 return ResponseEntity.ok(json);
             }
             return ResponseEntity.ok(callback + "(" + json + ");");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }*/
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<ItemCatResult> queryItemCatList(
+            @RequestParam(value = "callback", required = false)String callback) {
+        try {
+            ItemCatResult itemCatResult = this.itemCatService.queryAllToTree();
+            return ResponseEntity.ok(itemCatResult);
         } catch (Exception e) {
             e.printStackTrace();
         }
