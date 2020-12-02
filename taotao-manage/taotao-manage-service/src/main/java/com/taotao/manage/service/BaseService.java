@@ -152,7 +152,7 @@ public abstract class BaseService<T extends BasePojo> {
         Example example = new Example(clazz);
         // 设置条件
         example.createCriteria().andIn(property, ids);
-        return this.mapper.deleteByPrimaryKey(example);
+        return this.mapper.deleteByExample(example);
     }
 
     /**
