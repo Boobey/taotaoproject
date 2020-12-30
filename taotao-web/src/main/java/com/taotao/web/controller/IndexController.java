@@ -25,6 +25,10 @@ public class IndexController {
         // 首页大广告
         String indexAD1 = this.indexService.queryIndexAD1();
         mv.addObject("indexAD1",indexAD1);
+
+        // 首页小广告
+        String indexAD2 = this.indexService.queryIndexAD2();
+        mv.addObject("indexAD2",indexAD2);
         return mv;
     }
 }
