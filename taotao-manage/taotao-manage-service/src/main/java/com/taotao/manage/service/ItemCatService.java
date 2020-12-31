@@ -1,14 +1,19 @@
 package com.taotao.manage.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.abel533.mapper.Mapper;
 import com.taotao.common.bean.ItemCatData;
 import com.taotao.common.bean.ItemCatResult;
 import com.taotao.manage.mapper.ItemCatMapper;
 import com.taotao.manage.pojo.ItemCat;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +35,12 @@ public class ItemCatService extends BaseService<ItemCat>{
 //    public Mapper<ItemCat> getMapper() {
 //        return this.itemCatMapper;
 //    }
+
+    @Autowired
+    private RedisService redisService;
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
     /**
      * 全部查询，并且生成树状结构
      *
@@ -37,6 +48,21 @@ public class ItemCatService extends BaseService<ItemCat>{
      */
     public ItemCatResult queryAllToTree() {
         ItemCatResult result = new ItemCatResult();
+
+        // 先从缓存中命中，如果命中就返回，没有命中继续执行
+
+        String key = "TAOTAO_MANAGE_ITEM_CAT_API"; // 规则：项目名_模块名_业务名
+        String cacheData = this.redisService.get(key);
+
+        if (StringUtils.isNotEmpty(cacheData)) {
+            // 命中
+            try {
+                return MAPPER.readValue(cacheData, ItemCatResult.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         // 全部查出，并且在内存中生成树形结构
         List<ItemCat> cats = super.queryAll();
 
@@ -83,6 +109,15 @@ public class ItemCatService extends BaseService<ItemCat>{
                 break;
             }
         }
+
+        try {
+            // 将数据库查询结果集写入到缓存中
+            this.redisService.set(key, MAPPER.writeValueAsString(result), 60 * 60 * 24 * 30 * 3);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+
         return result;
     }
 }
