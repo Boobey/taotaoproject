@@ -1,6 +1,7 @@
 package com.taotao.web.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.manage.pojo.ItemDesc;
 import com.taotao.web.bean.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,21 @@ public class ItemService {
                 return null;
             }
             return MAPPER.readValue(jsonData, Item.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public ItemDesc queryDescByItemId(Long itemId) {
+        String url = TAOTAO_MANAGE_URL + "/rest/api/item/desc/" + itemId;
+        try {
+            String jsonData = this.apiService.doGet(url);
+            if (StringUtils.isEmpty(jsonData)) {
+                return null;
+            }
+            return MAPPER.readValue(jsonData, ItemDesc.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

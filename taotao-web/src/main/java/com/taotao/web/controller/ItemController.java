@@ -2,6 +2,7 @@ package com.taotao.web.controller;
 
 
 
+import com.taotao.manage.pojo.ItemDesc;
 import com.taotao.web.bean.Item;
 import com.taotao.web.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,13 @@ public class ItemController {
     @RequestMapping(value = "{itemId}", method = RequestMethod.GET)
     public ModelAndView itemDetail(@PathVariable("itemId") Long itemId) {
         ModelAndView mv = new ModelAndView("item");
+        // 设置模型数据
         Item item = this.itemService.queryById(itemId);
         mv.addObject("item", item);
+
+        // 商品描述数据
+        ItemDesc itemDesc = this.itemService.queryDescByItemId(itemId);
+        mv.addObject("itemDesc",itemDesc);
         return mv;
     }
 }
