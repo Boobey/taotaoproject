@@ -3,13 +3,14 @@ package com.taotao.web.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.taotao.common.service.RedisService;
 import com.taotao.manage.pojo.ItemDesc;
 import com.taotao.manage.pojo.ItemParamItem;
 import com.taotao.web.bean.Item;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.Id;
 import java.io.IOException;
@@ -25,13 +26,38 @@ public class ItemService {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
+    @Autowired
+    private RedisService redisService;
+
+    private static final String REDIS_KEY = "TAOTAO_WEB_ITEM_DETAIL_";
+    private static final Integer REDIS_TIME = 60 * 60 * 24;
+
     public Item queryById(Long itemId) {
+
+        String key = REDIS_KEY + itemId;
+        String cacheData = this.redisService.get(key);
+
+        if (StringUtils.isNotEmpty(cacheData)) {
+            try {
+                return MAPPER.readValue(cacheData, Item.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         String url = TAOTAO_MANAGE_URL + "/rest/api/item/" + itemId;
         try {
             String jsonData = this.apiService.doGet(url);
             if (StringUtils.isEmpty(jsonData)) {
                 return null;
             }
+
+            try {
+                this.redisService.set(key, jsonData, REDIS_TIME);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             return MAPPER.readValue(jsonData, Item.class);
         } catch (Exception e) {
             e.printStackTrace();
