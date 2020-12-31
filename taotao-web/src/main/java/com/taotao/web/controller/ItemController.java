@@ -29,6 +29,10 @@ public class ItemController {
         // 商品描述数据
         ItemDesc itemDesc = this.itemService.queryDescByItemId(itemId);
         mv.addObject("itemDesc",itemDesc);
+
+        // 商品规格参数数据
+        String itemParam = this.itemService.queryItemParamByItemId(itemId);
+        mv.addObject("itemParam", itemParam);
         return mv;
     }
 }
