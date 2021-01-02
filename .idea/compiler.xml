@@ -11,6 +11,7 @@
         <module name="taotao-common" />
         <module name="taotao-manage-service" />
         <module name="taotao-manage-pojo" />
+        <module name="taotao-sso" />
         <module name="taotao-manage-mapper" />
       </profile>
     </annotationProcessing>
