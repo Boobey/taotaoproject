@@ -3,6 +3,7 @@ package com.taotao.web.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.taotao.common.service.ApiService;
 import com.taotao.common.service.RedisService;
 import com.taotao.manage.pojo.ItemDesc;
 import com.taotao.manage.pojo.ItemParamItem;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Id;
 import java.io.IOException;
 
 @Service
@@ -29,7 +29,7 @@ public class ItemService {
     @Autowired
     private RedisService redisService;
 
-    private static final String REDIS_KEY = "TAOTAO_WEB_ITEM_DETAIL_";
+    public static final String REDIS_KEY = "TAOTAO_WEB_ITEM_DETAIL_";
     private static final Integer REDIS_TIME = 60 * 60 * 24;
 
     public Item queryById(Long itemId) {
