@@ -10,6 +10,7 @@
         <module name="taotao-manage-web" />
         <module name="taotao-common" />
         <module name="taotao-manage-service" />
+        <module name="taotao-order" />
         <module name="taotao-manage-pojo" />
         <module name="taotao-sso" />
         <module name="taotao-manage-mapper" />
