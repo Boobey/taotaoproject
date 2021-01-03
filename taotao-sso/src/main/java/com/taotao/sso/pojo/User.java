@@ -1,5 +1,8 @@
 package com.taotao.sso.pojo;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,12 +16,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Length(min = 6, max = 20, message = "用户名的长度在6~20之间.")
     private String username;
 
+    @Length(min = 6, max = 20, message = "密码的长度在6~20之间.")
     private String password;
 
+    @Length(min = 11, max = 11, message = "手机号的长度在必须是11.")
     private String phone;
 
+    @Email(message = "邮箱地址的格式不正确。")
     private String email;
 
     private Date created;
