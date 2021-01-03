@@ -7,6 +7,7 @@ import com.taotao.common.service.ApiService;
 import com.taotao.web.bean.Order;
 import com.taotao.web.bean.User;
 import com.taotao.web.threadlocal.UserThreadLocal;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,19 @@ public class OrderService {
                     // 提交成功
                     return jsonNode.get("data").asText();
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Order queryByOrderId(String orderId) {
+        String url = TAOTAO_ORDER_URL + "/order/query/" + orderId;
+        try {
+            String jsonData = this.apiService.doGet(url);
+            if (StringUtils.isNotEmpty(jsonData)) {
+                return MAPPER.readValue(jsonData, Order.class);
             }
         } catch (Exception e) {
             e.printStackTrace();

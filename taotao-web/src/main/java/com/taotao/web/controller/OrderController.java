@@ -9,6 +9,7 @@ import com.taotao.web.service.OrderService;
 import com.taotao.web.service.UserService;
 import com.taotao.web.threadlocal.UserThreadLocal;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -65,5 +66,16 @@ public class OrderController {
             result.put("data", orderId);
         }
         return result;
+    }
+
+    @RequestMapping(value = "success", method = RequestMethod.GET)
+    public ModelAndView success(@RequestParam("id") String orderId){
+        ModelAndView mv = new ModelAndView("success");
+        // 订单数据
+        Order order = this.orderService.queryByOrderId(orderId);
+        mv.addObject("order", order);
+        // 送货时间, 当前时间向后推两天,格式：XX月XX日
+        mv.addObject("date", new DateTime().plusDays(2).toString("MM月dd日"));
+        return mv;
     }
 }
