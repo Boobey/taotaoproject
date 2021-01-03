@@ -7,6 +7,7 @@ import com.taotao.web.interceptors.UserLoginHandlerInterceptor;
 import com.taotao.web.service.ItemService;
 import com.taotao.web.service.OrderService;
 import com.taotao.web.service.UserService;
+import com.taotao.web.threadlocal.UserThreadLocal;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,13 +52,8 @@ public class OrderController {
      */
     @RequestMapping(value = "submit", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> submit(Order order, @CookieValue(UserLoginHandlerInterceptor.COOKIE_NAME) String token){
+    public Map<String, Object> submit(Order order){
         Map<String, Object> result = new HashMap<>();
-
-        // 填充当前登录用户的信息
-        User user = this.userService.queryByToken(token);
-        order.setUserId(user.getId());
-        order.setBuyerNick(user.getUsername());
 
         String orderId = this.orderService.submit(order);
         if (StringUtils.isEmpty(orderId)) {

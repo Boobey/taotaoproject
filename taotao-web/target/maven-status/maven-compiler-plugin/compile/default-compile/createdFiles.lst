@@ -12,3 +12,4 @@ com\taotao\web\bean\Item.class
 com\taotao\web\service\UserService.class
 com\taotao\web\bean\User.class
 com\taotao\web\controller\OrderController.class
+com\taotao\web\threadlocal\UserThreadLocal.class

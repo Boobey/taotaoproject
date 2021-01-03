@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.common.httpclient.HttpResult;
 import com.taotao.common.service.ApiService;
 import com.taotao.web.bean.Order;
+import com.taotao.web.bean.User;
+import com.taotao.web.threadlocal.UserThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,11 @@ public class OrderService {
      */
     public String submit(Order order) {
         String url = TAOTAO_ORDER_URL + "/order/create";
+
+        // 填充当前登录用户的信息
+        User user = UserThreadLocal.get();
+        order.setUserId(user.getId());
+        order.setBuyerNick(user.getUsername());
 
         try {
             String json = MAPPER.writeValueAsString(order);
