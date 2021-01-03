@@ -8,6 +8,11 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <!-- 定义注解驱动 -->
     <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="com.taotao.common.spring.exetend.converter.json.CallbackMappingJackson2HttpMessageConverter">
+                <property name="callbackName" value="callback"/>
+            </bean>
+        </mvc:message-converters>
     </mvc:annotation-driven>
 
     <!-- 定义Controller的扫描包 -->

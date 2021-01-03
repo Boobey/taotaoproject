@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 
 @Service
@@ -76,5 +77,23 @@ public class UserService {
         String token = DigestUtils.md5Hex(username + System.currentTimeMillis());
         this.redisService.set("TOKEN_" + token, MAPPER.writeValueAsString(user), REDIS_TIME);
         return token;
+    }
+
+    public User queryUserByToken(String token) {
+        String key = "TOKEN_" + token;
+        String jsonData = this.redisService.get(key);
+        if (StringUtils.isEmpty(jsonData)) {
+            // 登录超时
+            return null;
+        }
+        // 重新设置redis中的生存时间
+        this.redisService.expire(key, REDIS_TIME);
+
+        try {
+            return MAPPER.readValue(jsonData, User.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
