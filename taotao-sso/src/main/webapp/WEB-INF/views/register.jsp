@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%
+    String staticUrl = "http://static.taotao.com";
+    request.setAttribute("staticUrl", staticUrl);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,9 +12,9 @@
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
     <title>注册-个人用户</title>
-    <link type="text/css" rel="stylesheet" href="/css/regist.personal.css"/>
-    <link type="text/css" rel="stylesheet" href="/css/passport.base.css"/>
-    <script type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="${staticUrl}/css/regist.personal.css"/>
+    <link type="text/css" rel="stylesheet" href="${staticUrl}/css/passport.base.css"/>
+    <script type="text/javascript" src="${staticUrl}/js/jquery-1.2.6.min.js"></script>
 </head>
 <body>
     <script type="text/javascript">
@@ -80,7 +84,7 @@ function addToFavorite() {
 <div class="w" id="logo">
     <div>
     	<a href="http://www.taotao.com/">
-    		<img src="/images/taotao-logo.gif" alt="京东商城" width="170" height="60"/>
+    		<img src="${staticUrl}/images/taotao-logo.gif" alt="京东商城" width="170" height="60"/>
     	</a> <b></b>
     </div>
 </div>
@@ -239,7 +243,7 @@ function addToFavorite() {
                 </div>
             </div>
             <div class="phone">
-                <img width="180" height="180" src="/images/phone-bg.jpg">
+                <img width="180" height="180" src="${staticUrl}/images/phone-bg.jpg">
             </div>
                         <span class="clr"></span>
         </form>
@@ -269,11 +273,11 @@ function addToFavorite() {
     <jsp:include page="../commons/footer-links.jsp"></jsp:include>
     <!-- links end -->
 </div>
-<script type="text/javascript" src="/js/register/jd.lib.js"></script>
-<script type="text/javascript" src="/js/register/jdThickBox.js"></script>
-<script type="text/javascript" src="/js/register/jdValidate.js"></script>
-<script type="text/javascript" src="/js/register/jdValidate.emReg.js"></script>
-<script type="text/javascript" src="/js/register/jdValidate.regSuccess.js"></script>
+<script type="text/javascript" src="${staticUrl}/js/register/jd.lib.js"></script>
+<script type="text/javascript" src="${staticUrl}/js/register/jdThickBox.js"></script>
+<script type="text/javascript" src="${staticUrl}/js/register/jdValidate.js"></script>
+<script type="text/javascript" src="${staticUrl}/js/register/jdValidate.emReg.js"></script>
+<script type="text/javascript" src="${staticUrl}/js/register/jdValidate.regSuccess.js"></script>
 
 
 <script id="box01" type="text/temp">
