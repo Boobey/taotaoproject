@@ -1,12 +1,17 @@
 package com.taotao.sso.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.fabric.xmlrpc.base.Param;
+import com.taotao.common.service.RedisService;
 import com.taotao.sso.mapper.UserMapper;
 import com.taotao.sso.pojo.User;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.Date;
 
 @Service
@@ -14,6 +19,13 @@ public class UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RedisService redisService;
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    private static final Integer REDIS_TIME = 60 * 30;
 
     public Boolean check(String param, Integer type) {
         User record = new User();
@@ -45,5 +57,24 @@ public class UserService {
         // 加密处理,MD5加密
         user.setPassword(DigestUtils.md5Hex(user.getPassword()));
         return this.userMapper.insert(user) == 1;
+    }
+
+    public String doLogin(String username, String password) throws Exception {
+        User record = new User();
+        record.setUsername(username);
+        User user = this.userMapper.selectOne(record);
+        if (null == user) {
+            // 用户不存在
+            return null;
+        }
+
+        if (! StringUtils.equals(DigestUtils.md5Hex(password), user.getPassword())) {
+            // 密码错误
+            return null;
+        }
+        // 登录成功, 将用户的信息保存到Redis中
+        String token = DigestUtils.md5Hex(username + System.currentTimeMillis());
+        this.redisService.set("TOKEN_" + token, MAPPER.writeValueAsString(user), REDIS_TIME);
+        return token;
     }
 }

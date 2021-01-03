@@ -6,3 +6,4 @@ com\taotao\common\bean\EasyUIResult.class
 com\taotao\common\httpclient\HttpResult.class
 com\taotao\common\httpclient\IdleConnectionEvictor.class
 com\taotao\common\bean\ItemCatData.class
+com\taotao\common\utils\CookieUtils.class

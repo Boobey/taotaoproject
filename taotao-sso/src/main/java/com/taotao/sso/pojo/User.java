@@ -1,5 +1,6 @@
 package com.taotao.sso.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
@@ -19,6 +20,7 @@ public class User {
     @Length(min = 6, max = 20, message = "用户名的长度在6~20之间.")
     private String username;
 
+    @JsonIgnore // 序列化忽略该字段
     @Length(min = 6, max = 20, message = "密码的长度在6~20之间.")
     private String password;
 
