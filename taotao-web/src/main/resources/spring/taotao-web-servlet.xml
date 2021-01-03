@@ -21,4 +21,11 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <mvc:interceptors>
+        <!-- 检测用户是否登录的拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/order/**"/>
+            <bean class="com.taotao.web.interceptors.UserLoginHandlerInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
