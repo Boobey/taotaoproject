@@ -1,6 +1,14 @@
 E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\bean\Item.java
-E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\controller\ItemCacheController.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\service\OrderService.java
 E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\controller\ItemController.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\service\IndexService.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\controller\OrderController.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\bean\OrderShipping.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\bean\User.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\controller\ItemCacheController.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\bean\OrderItem.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\interceptors\UserLoginHandlerInterceptor.java
 E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\service\ItemService.java
 E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\controller\IndexController.java
-E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\service\IndexService.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\service\UserService.java
+E:\ProjectsData\IntelliJ IDEA\taotaoproject\taotao-web\src\main\java\com\taotao\web\bean\Order.java

@@ -10,6 +10,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -78,6 +80,38 @@ public class ApiService implements BeanFactoryAware {
             builder.setParameter(entry.getKey(), entry.getValue());
         }
         return this.doGet(builder.build().toString());
+    }
+
+    /**
+     * 带有json参数的POST请求
+     *
+     * @param url
+     * @param params
+     * @return
+     * @throws ParseException
+     * @throws IOException
+     */
+    public HttpResult doPostJson(String url, String json) throws ParseException, IOException {
+        // 创建http POST请求
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.setConfig(requestConfig);
+        if (null != json) {
+            StringEntity stringEntity = new StringEntity(json, ContentType.APPLICATION_JSON);
+            // 将请求实体设置到httpPost对象中
+            httpPost.setEntity(stringEntity);
+        }
+
+        CloseableHttpResponse response = null;
+        try {
+            // 执行请求
+            response = getHttpClient().execute(httpPost);
+            return new HttpResult(response.getStatusLine().getStatusCode(), EntityUtils.toString(
+                    response.getEntity(), "UTF-8"));
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
     }
 
     /**
