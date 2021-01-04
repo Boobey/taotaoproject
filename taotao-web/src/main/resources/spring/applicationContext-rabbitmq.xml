@@ -13,10 +13,14 @@
     <!-- 管理 -->
     <rabbit:admin connection-factory="connectionFactory"/>
 
-    <!-- 定义交换机 -->
-    <rabbit:topic-exchange name="TAOTAO-ITEM-EXCHANGE" auto-declare="true" durable="true"></rabbit:topic-exchange>
+    <!-- 定义队列 -->
+    <rabbit:queue name="TAOTAO-WEB-ITEM-QUEUE" auto-declare="true" durable="true"></rabbit:queue>
 
-    <!-- 定义模板 -->
-    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory" exchange="TAOTAO-ITEM-EXCHANGE"></rabbit:template>
+    <!-- 消费者对象 -->
+    <bean id="itemMQHandler" class="com.taotao.web.mq.handler.ItemMQHandler"></bean>
 
+    <!-- 监听队列 -->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="itemMQHandler" method="execute" queue-names="TAOTAO-WEB-ITEM-QUEUE"/>
+     </rabbit:listener-container>
 </beans>
