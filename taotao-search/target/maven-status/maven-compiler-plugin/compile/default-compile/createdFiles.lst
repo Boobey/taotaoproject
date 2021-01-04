@@ -1,0 +1,4 @@
+com\taotao\search\controller\SearchController.class
+com\taotao\search\bean\Item.class
+com\taotao\search\service\ItemSearchService.class
+com\taotao\search\bean\SearchResult.class
