@@ -315,3 +315,8 @@
 127.0.0.1 - - [03/Jan/2021:21:55:45 +0800] "GET /images/20130725.png HTTP/1.0" 200 275 http-bio-8082-exec-10 4
 127.0.0.1 - - [03/Jan/2021:21:55:45 +0800] "GET /images/flow.gif HTTP/1.0" 200 818 http-bio-8082-exec-2 3
 127.0.0.1 - - [03/Jan/2021:21:55:45 +0800] "GET /images/icon48.png HTTP/1.0" 200 391 http-bio-8082-exec-4 1
+127.0.0.1 - - [03/Jan/2021:22:06:23 +0800] "GET /item/562379.html HTTP/1.0" 200 45373 http-bio-8082-exec-6 133
+127.0.0.1 - - [03/Jan/2021:22:06:23 +0800] "GET /css/taotao.css HTTP/1.0" 200 32768 http-bio-8082-exec-8 3
+127.0.0.1 - - [03/Jan/2021:22:06:23 +0800] "GET /js/taotao.js HTTP/1.0" 200 566 http-bio-8082-exec-3 2
+127.0.0.1 - - [03/Jan/2021:22:07:17 +0800] "GET /item/536563.html HTTP/1.0" 200 50717 http-bio-8082-exec-5 61
+127.0.0.1 - - [03/Jan/2021:22:07:50 +0800] "GET /item/917770.html HTTP/1.0" 200 37718 http-bio-8082-exec-7 44

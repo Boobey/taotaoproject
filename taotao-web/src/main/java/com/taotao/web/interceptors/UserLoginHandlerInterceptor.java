@@ -21,7 +21,6 @@ public class UserLoginHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        UserThreadLocal.set(null); // 清空本地线程中的User对象数据
 
         String loginUrl = this.userService.TAOTAO_SSO_URL + "/user/login.html";
         String token = CookieUtils.getCookieValue(request, COOKIE_NAME);
@@ -51,6 +50,6 @@ public class UserLoginHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
+        UserThreadLocal.set(null); // 清空本地线程中的User对象数据
     }
 }
