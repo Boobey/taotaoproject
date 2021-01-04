@@ -1,5 +1,7 @@
 package com.taotao.manage.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.abel533.entity.Example;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -9,12 +11,15 @@ import com.taotao.manage.mapper.ItemMapper;
 import com.taotao.manage.pojo.Item;
 import com.taotao.manage.pojo.ItemDesc;
 import com.taotao.manage.pojo.ItemParamItem;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ItemService extends BaseService<Item> {
@@ -34,6 +39,11 @@ public class ItemService extends BaseService<Item> {
     @Value("${TAOTAO_WEB_URL}")
     private String TAOTAO_WEB_URL;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
     public Boolean saveItem(Item item, String desc, String itemParams) {
         // 初始值
         item.setStatus(1);
@@ -51,6 +61,9 @@ public class ItemService extends BaseService<Item> {
         itemParamItem.setItemId(item.getId());
         itemParamItem.setParamData(itemParams);
         Integer count3 = this.itemParamItemService.save(itemParamItem);
+
+        // 发送消息到MQ的交换机，通知其它系统
+        sendMsg(item.getId(), "insert");
 
         return count1.intValue() == 1 && count2.intValue() == 1 && count3.intValue() == 1;
     }
@@ -83,14 +96,31 @@ public class ItemService extends BaseService<Item> {
         // 更新规格参数数据
         Integer count3 = this.itemParamItemService.updateItemParamsItem(item.getId(), itemParams);
 
+//        try {
+//            // 通知其它系统该商品已经更新
+//            String url = TAOTAO_WEB_URL + "/item/cache/" + item.getId() + ".html";
+//            this.apiService.doPost(url);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
+        // 发送消息到MQ的交换机，通知其它系统
+        sendMsg(item.getId(), "update");
+
+        return count1.intValue() == 1 && count2.intValue() == 1 && count3.intValue() == 1;
+    }
+
+    private void sendMsg(Long itemId, String type){
         try {
-            // 通知其它系统该商品已经更新
-            String url = TAOTAO_WEB_URL + "/item/cache/" + item.getId() + ".html";
-            this.apiService.doPost(url);
+            // 发送消息到MQ的交换机，通知其它系统
+            Map<String, Object> msg = new HashMap();
+            msg.put("itemId", itemId);
+            msg.put("type", type);
+            msg.put("date", System.currentTimeMillis());
+            this.rabbitTemplate.convertAndSend("item." + type, MAPPER.writeValueAsString(msg));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return count1.intValue() == 1 && count2.intValue() == 1 && count3.intValue() == 1;
     }
 }
