@@ -59,16 +59,20 @@ public class CartService {
         }
     }
 
-    public List<Cart> queryCartList() {
+    public List<Cart> queryCartList(Long userId) {
         Example example = new Example(Cart.class);
 
         // 设置排序条件
         example.setOrderByClause("created DESC");
 
         // 设置查询条件
-        example.createCriteria().andEqualTo("userId", UserThreadLocal.get().getId());
+        example.createCriteria().andEqualTo("userId", userId);
 
         return this.cartMapper.selectByExample(example);
+    }
+
+    public List<Cart> queryCartList() {
+        return this.queryCartList(UserThreadLocal.get().getId());
     }
 
     public void updateNum(Long itemId, Integer num) {
@@ -92,5 +96,4 @@ public class CartService {
         record.setUserId(UserThreadLocal.get().getId());
         this.cartMapper.delete(record);
     }
-
 }

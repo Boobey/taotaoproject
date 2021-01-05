@@ -1,9 +1,11 @@
 package com.taotao.web.controller;
 
+import com.taotao.web.bean.Cart;
 import com.taotao.web.bean.Item;
 import com.taotao.web.bean.Order;
 import com.taotao.web.bean.User;
 import com.taotao.web.interceptors.UserLoginHandlerInterceptor;
+import com.taotao.web.service.CartService;
 import com.taotao.web.service.ItemService;
 import com.taotao.web.service.OrderService;
 import com.taotao.web.service.UserService;
@@ -11,11 +13,13 @@ import com.taotao.web.threadlocal.UserThreadLocal;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("order")
@@ -29,7 +33,7 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
-    private UserService userService;
+    private CartService cartService;
 
     /**
      *  订单确认页
@@ -42,6 +46,20 @@ public class OrderController {
         ModelAndView mv = new ModelAndView("order");
         Item item = this.itemService.queryById(itemId);
         mv.addObject("item", item);
+        return mv;
+    }
+
+    /**
+     *  基于购物车下单
+     *
+     * @return
+     */
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public ModelAndView toCartOrder() {
+        ModelAndView mv = new ModelAndView("order-cart");
+        List<Cart> carts = this.cartService.queryCartList();
+        System.out.println("---------> " + carts);
+        mv.addObject("carts", carts);
         return mv;
     }
 

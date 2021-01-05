@@ -6,6 +6,7 @@ com\taotao\cart\bean\Item.class
 com\taotao\cart\service\CartCookieService.class
 com\taotao\cart\threadlocal\UserThreadLocal.class
 com\taotao\cart\service\ItemService.class
+com\taotao\cart\controller\api\ApiCartController.class
 com\taotao\cart\interceptors\UserLoginHandlerInterceptor.class
 com\taotao\cart\mapper\CartMapper.class
 com\taotao\cart\service\CartService.class
