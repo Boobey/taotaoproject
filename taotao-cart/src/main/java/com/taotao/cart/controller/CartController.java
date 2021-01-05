@@ -72,4 +72,19 @@ public class CartController {
 
     }
 
+    @RequestMapping(value = "delete/{itemId}", method = RequestMethod.GET)
+    public String delete(@PathVariable("itemId") Long itemId) {
+        User user = UserThreadLocal.get();
+        if (null == user) {
+            // 未登录状态
+
+        } else {
+            // 登录状态
+            this.cartService.delete(itemId);
+        }
+        // 重定向到购物车列表页面
+        return "redirect:/cart/list.html";
+
+    }
+
 }

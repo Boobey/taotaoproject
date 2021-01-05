@@ -85,4 +85,11 @@ public class CartService {
 
         this.cartMapper.updateByExampleSelective(record, example);
     }
+
+    public void delete(Long itemId) {
+        Cart record = new Cart();
+        record.setItemId(itemId);
+        record.setUserId(UserThreadLocal.get().getId());
+        this.cartMapper.delete(record);
+    }
 }
