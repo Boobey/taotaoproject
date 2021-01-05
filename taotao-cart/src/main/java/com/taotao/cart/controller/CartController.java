@@ -1,6 +1,7 @@
 package com.taotao.cart.controller;
 
 import com.taotao.cart.bean.User;
+import com.taotao.cart.pojo.Cart;
 import com.taotao.cart.service.CartService;
 import com.taotao.cart.threadlocal.UserThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @RequestMapping("cart")
 @Controller
@@ -20,6 +23,15 @@ public class CartController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView cartList() {
         ModelAndView mv= new ModelAndView("cart");
+        User user = UserThreadLocal.get();
+        if (null == user) {
+            // 未登录状态
+
+        } else {
+            // 登录状态
+            List<Cart> cartList = this.cartService.queryCartList();
+            mv.addObject("cartList", cartList);
+        }
         return mv;
     }
 

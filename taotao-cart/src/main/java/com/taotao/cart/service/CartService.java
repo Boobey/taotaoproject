@@ -1,5 +1,6 @@
 package com.taotao.cart.service;
 
+import com.github.abel533.entity.Example;
 import com.taotao.cart.bean.Item;
 import com.taotao.cart.bean.User;
 import com.taotao.cart.mapper.CartMapper;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CartService {
@@ -45,7 +47,7 @@ public class CartService {
             cart.setItemTitle(item.getTitle());
             cart.setItemPrice(item.getPrice());
             cart.setItemImage(StringUtils.split(item.getImage(), ',')[0]);
-            cart.setNum(1); // TODO
+            cart.setNum(1);
 
             // 保存到数据库
             this.cartMapper.insert(cart);
@@ -55,5 +57,17 @@ public class CartService {
             cart.setUpdated(new Date());
             this.cartMapper.updateByPrimaryKey(cart);
         }
+    }
+
+    public List<Cart> queryCartList() {
+        Example example = new Example(Cart.class);
+
+        // 设置排序条件
+        example.setOrderByClause("created DESC");
+
+        // 设置查询条件
+        example.createCriteria().andEqualTo("userId", UserThreadLocal.get().getId());
+
+        return this.cartMapper.selectByExample(example);
     }
 }

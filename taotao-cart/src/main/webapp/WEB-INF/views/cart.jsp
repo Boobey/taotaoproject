@@ -2,6 +2,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+    String staticUrl = "http://static.taotao.com";
+    request.setAttribute("staticUrl", staticUrl);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
    <meta http-equiv="pragma" content="no-cache">
@@ -11,8 +15,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
    <meta name="format-detection" content="telephone=no">
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <link rel="stylesheet" href="/css/base.css">
-   <link href="/css/purchase.2012.css?v=201410141639" rel="stylesheet" type="text/css">
+   <link rel="stylesheet" href="${staticUrl}/css/base.css">
+   <link href="${staticUrl}/css/purchase.2012.css?v=201410141639" rel="stylesheet" type="text/css">
    <title>我的购物车 - 淘淘商城</title>
    <script>
    	var pageConfig  = {};
@@ -22,7 +26,7 @@
 <jsp:include page="../commons/shortcut.jsp" />
 <!--shortcut end-->
 <div class="w w1 header clearfix">
-	<div id="logo"><a href="http://www.taotao.com/"><img clstag="clickcart|keycount|xincart|logo" src="/images/taotao-logo.gif" title="返回淘淘商城首页" alt="返回淘淘商城首页"></a></div>
+	<div id="logo"><a href="http://www.taotao.com/"><img clstag="clickcart|keycount|xincart|logo" src="${staticUrl}/images/taotao-logo.gif" title="返回淘淘商城首页" alt="返回淘淘商城首页"></a></div>
     <div class="language"><a href="javascript:void(0);" onclick="toEnCart()"></a></div>
 	<div class="progress clearfix">
 		<ul class="progress-1">
@@ -146,13 +150,13 @@
 <!--推荐位html修改处-->
 
 
-<script type="text/javascript" src="/js/base-v1.js"></script>
+<script type="text/javascript" src="${staticUrl}/js/base-v1.js"></script>
 <!-- footer start -->
 <jsp:include page="../commons/footer.jsp" />
 <!-- footer end -->
 
 <!-- 购物车相关业务 -->
-<script type="text/javascript" src="/js/cart.js"></script>
-<script type="text/javascript" src="/js/jquery.price_format.2.0.min.js"></script>
+<script type="text/javascript" src="${staticUrl}/js/cart.js"></script>
+<script type="text/javascript" src="${staticUrl}/js/jquery.price_format.2.0.min.js"></script>
 
 </html>
