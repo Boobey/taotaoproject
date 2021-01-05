@@ -2,3 +2,14 @@
 127.0.0.1 - - [05/Jan/2021:14:45:20 +0800] "GET /favicon.ico HTTP/1.0" 404 973 http-bio-8085-exec-2 4
 127.0.0.1 - - [05/Jan/2021:14:47:43 +0800] "GET /search.html?q=%E4%BC%A0%E5%AE%B6%E5%AE%9D HTTP/1.0" 200 19201 http-bio-8085-exec-3 33
 127.0.0.1 - - [05/Jan/2021:14:47:44 +0800] "GET /favicon.ico HTTP/1.0" 404 973 http-bio-8085-exec-4 2
+127.0.0.1 - - [05/Jan/2021:16:08:16 +0800] "GET /search.html?q=apple HTTP/1.0" 200 42501 http-bio-8085-exec-5 105
+127.0.0.1 - - [05/Jan/2021:16:08:17 +0800] "GET /images/blank.gif HTTP/1.0" 404 983 http-bio-8085-exec-6 2
+127.0.0.1 - - [05/Jan/2021:16:08:24 +0800] "GET /search.html?q=%E8%80%81%E5%8F%B8%E6%9C%BA HTTP/1.0" 200 19208 http-bio-8085-exec-8 25
+127.0.0.1 - - [05/Jan/2021:18:04:19 +0800] "GET /search.html?q=%E8%80%81%E5%8F%B8%E6%9C%BA HTTP/1.0" 200 19208 http-bio-8085-exec-9 46
+127.0.0.1 - - [05/Jan/2021:18:04:19 +0800] "GET /favicon.ico HTTP/1.0" 404 973 http-bio-8085-exec-10 2
+127.0.0.1 - - [05/Jan/2021:18:05:02 +0800] "GET /search.html?q=%E5%B0%8F%E7%B1%B3 HTTP/1.0" 200 25878 http-bio-8085-exec-1 74
+127.0.0.1 - - [05/Jan/2021:18:05:02 +0800] "GET /favicon.ico HTTP/1.0" 404 973 http-bio-8085-exec-2 1
+127.0.0.1 - - [05/Jan/2021:18:09:40 +0800] "GET /search.html?q=tcl&page=1 HTTP/1.0" 200 42307 http-bio-8085-exec-3 116
+127.0.0.1 - - [05/Jan/2021:18:09:41 +0800] "GET /images/blank.gif HTTP/1.0" 404 983 http-bio-8085-exec-4 1
+127.0.0.1 - - [05/Jan/2021:18:09:41 +0800] "GET /favicon.ico HTTP/1.0" 404 973 http-bio-8085-exec-5 2
+127.0.0.1 - - [05/Jan/2021:18:09:45 +0800] "GET /search.html?q=%E5%B0%8F%E7%B1%B3 HTTP/1.0" 200 25878 http-bio-8085-exec-6 39

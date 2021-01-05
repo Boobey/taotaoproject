@@ -92,4 +92,5 @@ public class CartService {
         record.setUserId(UserThreadLocal.get().getId());
         this.cartMapper.delete(record);
     }
+
 }
