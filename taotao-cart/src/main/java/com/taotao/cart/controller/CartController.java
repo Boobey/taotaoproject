@@ -5,6 +5,8 @@ import com.taotao.cart.pojo.Cart;
 import com.taotao.cart.service.CartService;
 import com.taotao.cart.threadlocal.UserThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +55,21 @@ public class CartController {
 
         // 重定向到购物车列表页面
         return "redirect:/cart/list.html";
+    }
+
+    @RequestMapping(value = "update/num/{itemId}/{num}", method = RequestMethod.POST)
+    public ResponseEntity<Void> updateNum(@PathVariable("itemId") Long itemId,
+                                          @PathVariable("num") Integer num){
+        User user = UserThreadLocal.get();
+        if (null == user) {
+            // 未登录状态
+
+        } else {
+            // 登录状态
+            this.cartService.updateNum(itemId, num);
+        }
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
     }
 
 }

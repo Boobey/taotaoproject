@@ -70,4 +70,19 @@ public class CartService {
 
         return this.cartMapper.selectByExample(example);
     }
+
+    public void updateNum(Long itemId, Integer num) {
+
+        // 更新的数据
+        Cart record = new Cart();
+        record.setNum(num);
+        record.setUpdated(new Date());
+
+        // 更新的条件
+        Example example = new Example(Cart.class);
+        example.createCriteria().andEqualTo("itemId", itemId)
+                .andEqualTo("userId", UserThreadLocal.get().getId());
+
+        this.cartMapper.updateByExampleSelective(record, example);
+    }
 }
