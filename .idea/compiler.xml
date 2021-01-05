@@ -13,6 +13,7 @@
         <module name="taotao-order" />
         <module name="taotao-manage-pojo" />
         <module name="taotao-search" />
+        <module name="taotao-cart" />
         <module name="taotao-sso" />
         <module name="taotao-manage-mapper" />
       </profile>
