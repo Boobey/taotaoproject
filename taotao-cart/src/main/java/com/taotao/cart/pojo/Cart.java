@@ -21,11 +21,21 @@ public class Cart {
 
     private String itemImage;
 
+    private Long itemPrice;
+
     private Integer num;
 
     private Date created;
 
     private Date updated;
+
+    public Long getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(Long itemPrice) {
+        this.itemPrice = itemPrice;
+    }
 
     public Long getId() {
         return id;
