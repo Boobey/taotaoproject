@@ -16,6 +16,8 @@
         <module>taotao-order</module>
         <module>taotao-search</module>
         <module>taotao-cart</module>
+        <module>taotao-sso-query-api</module>
+        <module>taotao-sso-query-service</module>
     </modules>
 
     <properties>

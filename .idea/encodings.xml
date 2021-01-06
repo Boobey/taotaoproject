@@ -21,6 +21,10 @@
     <file url="file://$PROJECT_DIR$/taotao-order/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-search/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-search/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso-query-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso-query-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso-query-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-sso-query-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-sso/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-sso/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-web/src/main/java" charset="UTF-8" />
