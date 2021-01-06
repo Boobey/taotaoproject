@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
-public class User {
+public class User implements java.io.Serializable{
+
+    private static final long serialVerionUID = 7L;
 
     private Long id;
 
